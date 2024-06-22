@@ -127,3 +127,22 @@ header > h1{
     border: 4px solid #464647;
     box-shadow: 0 0 10px #25292b;
 }
+
+.pokemon{
+    width: 200px;
+    height: 300px;
+    border: 3px solid rgb(255, 255, 255);
+}
+.pokemon > img {
+    width: 100%;
+    height: 200px;
+    border-bottom: 3px solid white;
+}
+.pokemon>.name{
+    color: white;
+    font-size: 29px;
+}
+.pokemon>.type{
+    color: white;
+    font-size: 25;
+}
