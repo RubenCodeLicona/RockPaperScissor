@@ -85,23 +85,35 @@ function game (userChoice) {
     }
 }
 
+async function fetchData(){
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+    const data = await response.json();
+    console.log(data);
+    const name = data.name;
+    const type = data.types[0].type.name;
+    console.log(type);
 
+}
 
+function PokBlastoise(){
+
+}
 
    
 function main() {
 
-    rock_div.addEventListener('click', function() {
-         game("r");
-    })
+    // rock_div.addEventListener('click', function() {
+    //      game("r");
+    // })
 
-    paper_div.addEventListener('click', function() {
-         game("p");
-    })
+    // paper_div.addEventListener('click', function() {
+    //      game("p");
+    // })
 
-    scissors_div.addEventListener('click', function() { 
-        game("s");
-    })
+    // scissors_div.addEventListener('click', function() { 
+    //     game("s");
+    // })
+    fetchData();
     }
 
     
