@@ -4,16 +4,16 @@ const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector(".score-board");
 const result_p = document.querySelector(".result > p");
-const rock_div = document.getElementById("r");
-const paper_div = document.getElementById("p");
+const charizard = document.getElementById("charizard");
+const blastoise = document.getElementById("blastoise");
 const scissors_div = document.getElementById("s");
 
 
 
 
 function getComputerChoice() {
-    const choices = ['r', 'p', 's'];
-    const randomNumber = Math.floor(Math.random() * 3);
+    const choices = ["phanpy", "blastoise", "pikachu", "chikorita", "charizard"];
+    const randomNumber = Math.floor(Math.random() * 5);
     return choices[randomNumber];
     }
 
@@ -67,54 +67,118 @@ function draw(userChoice, computerChoice){
 function game (userChoice) {
     const computerChoice = getComputerChoice();
     switch (userChoice + computerChoice) {
-    case "rs":
-    case "pr":
-    case "sp":
+        case "charizardchikorita":
+        case "charizardpikachu":
+        
+        case "phanpycharizard":
+        case "blastoisecharizard":
+    
         win(userChoice, computerChoice);
         break;
-    case "rp":
-    case "ps":
-    case "sr":
+
+        case "charizardblastoise":
+        case "charizardphanpy":
+        
+    
+   
         lose(userChoice, computerChoice);
         break;
-    case "rr":
-    case "pp":
-    case "ss":
+
+    default:   
+
         draw(userChoice, computerChoice);
         break;
     }
 }
 
-async function fetchData(){
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-    const data = await response.json();
+
+function getPikachu(){
+
+    const request = fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
+    console.log(request);
+    
+    request.then(function(resp){
+        console.log(resp);
+        resp.json().then(function(resp2){
+
+            console.log(resp2)
+        })
+        
+    })
+    
+}
+//Async - await
+async function getCharizard(){
+    const request = fetch("https://pokeapi.co/api/v2/pokemon/charizard");
+    const response = await request
+    console.log(response);
+    const data = await response.json()
     console.log(data);
+    changeHTML("charizard",data)
+    
+    
+}
+
+function changeHTML(pokemonName, data){
+
+    const container = document.getElementById(pokemonName);
+    const children = container.children; 
+    const image = data.sprites.front_default;
+    children[0].setAttribute("src", image)
     const name = data.name;
+    children[1].innerHTML = name;
     const type = data.types[0].type.name;
-    console.log(type);
-
+    children[2].innerHTML = type;
 }
 
-function PokBlastoise(){
-
+async function getBlastoise(){
+    const request = fetch("https://pokeapi.co/api/v2/pokemon/blastoise");
+    const response = await request
+    console.log(response);
+    const data = await response.json()
+    console.log(data);
+    changeHTML("blastoise",data)
 }
 
+async function getPhanpy(){
+    const request = fetch("https://pokeapi.co/api/v2/pokemon/phanpy");
+    const response = await request
+    console.log(response);
+    const data = await response.json()
+    console.log(data);
+}
+
+async function getChikorita(){
+    const request = fetch("https://pokeapi.co/api/v2/pokemon/chikorita");
+    const response = await request
+    console.log(response);
+    const data = await response.json()
+    console.log(data);
+}
    
 function main() {
 
-    // rock_div.addEventListener('click', function() {
-    //      game("r");
-    // })
+    charizard.addEventListener('click', function() {
+         game("charizard");
+    })
 
-    // paper_div.addEventListener('click', function() {
-    //      game("p");
-    // })
+    blastoise.addEventListener('click', function() {
+         game("blastoise");
+    })
 
     // scissors_div.addEventListener('click', function() { 
     //     game("s");
     // })
-    fetchData();
+    
+    getCharizard();
+    getBlastoise();
+    getPikachu();
+    getPhanpy();
+    getChikorita()
+
     }
+
+
 
     
 main(); 
